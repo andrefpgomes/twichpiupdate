@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#181022">
+  <title>TwitchPi — Dashboard</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="TwitchPi, página inicial">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" focusable="false">
+            <path d="M10 5h28v26L27 42H18l-8-9V5Z" fill="currentColor" opacity=".22"/>
+            <path d="M12 7h24v23l-10 10h-7l-7-8V7Zm4 7v13h4V14h-4Zm9 0v13h4V14h-4Z" fill="currentColor"/>
+          </svg>
+        </span>
+        <span>
+          <strong>TwitchPi</strong>
+          <small>Dashboard Raspberry Pi</small>
+        </span>
+      </a>
+
+      <div class="header-actions">
+        <span id="online" class="connection connection--checking" role="status" aria-live="polite">
+          <span class="connection-dot" aria-hidden="true"></span>
+          <span class="connection-label">A verificar ligação</span>
+        </span>
+        <button id="loginBtn" class="button button--subtle" type="button">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M13 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6M3 12h12m-4-4 4 4-4 4"/></svg>
+          <span>Ligar à Twitch</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="hero card" aria-labelledby="viewer-title">
+      <div class="hero__heading">
+        <div>
+          <p class="eyebrow">TRANSMISSÃO ATUAL</p>
+          <h1 id="viewer-title"><span id="channel">Nenhum canal selecionado</span></h1>
+        </div>
+        <span id="playState" class="state state--idle">
+          <span class="state__dot" aria-hidden="true"></span>
+          <span id="playStateText">Parada</span>
+        </span>
+      </div>
+
+      <div class="viewer-summary">
+        <span class="viewer-summary__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M20 15.5a4.5 4.5 0 0 1-4.5 4.5H8.5A4.5 4.5 0 0 1 4 15.5v-7A4.5 4.5 0 0 1 8.5 4h7A4.5 4.5 0 0 1 20 8.5v7ZM9.5 8.5l5 3.5-5 3.5v-7Z"/></svg>
+        </span>
+        <p id="status">A sincronizar o estado da visualização…</p>
+      </div>
+
+      <div class="controls" aria-label="Controlos de visualização">
+        <button id="startBtn" class="button button--primary" type="button">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z"/></svg>
+          <span>Começar a ver</span>
+        </button>
+        <button id="stopBtn" class="button button--secondary" type="button">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 7h10v10H7z"/></svg>
+          <span>Parar</span>
+        </button>
+        <button id="reloadBtn" class="button button--ghost" type="button">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0 2 5.3M20 4v7h-7"/></svg>
+          <span>Reabrir live</span>
+        </button>
+      </div>
+      <p id="controlMessage" class="notice" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="card channel-card" aria-labelledby="channel-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">CANAL</p>
+          <h2 id="channel-title">Escolher uma live</h2>
+        </div>
+        <span class="section-hint">Utilizador Twitch</span>
+      </div>
+      <form id="channelForm" class="channel-form" novalidate>
+        <label class="sr-only" for="channelInput">Nome do canal Twitch</label>
+        <input id="channelInput" name="channel" type="text" placeholder="ex.: twitch" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="100">
+        <button id="openBtn" class="button button--primary" type="submit">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+          <span>Selecionar</span>
+        </button>
+      </form>
+      <p id="channelMessage" class="field-message" aria-live="polite"></p>
+    </section>
+
+    <section id="loginNotice" class="notice notice--login" role="status" aria-live="polite" hidden></section>
+
+    <footer class="footer">
+      <span>TwitchPi</span><span aria-hidden="true">·</span><span>Controlo local da Raspberry Pi</span>
+    </footer>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
